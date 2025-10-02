@@ -19,6 +19,7 @@ L.Icon.Default.mergeOptions({
 
 import { useMap } from "react-leaflet";
 import "leaflet-ant-path"; // important side-effect import
+import Feedback from "./Feedback";
 
 const AntPathLayer = ({ positions }) => {
   const map = useMap();
@@ -129,6 +130,8 @@ const Contact = () => {
           </Marker>
         )}
       </MapContainer>
+
+      <Feedback />
     </div>
   );
 };
