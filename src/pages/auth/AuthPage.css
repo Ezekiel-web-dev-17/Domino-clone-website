@@ -1,18 +1,7 @@
 h1 {
   font-family: "Poppins", sans-serif;
 }
-/* 
-.authpg form::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  backdrop-filter: blur(8px);
-  background-color: linear-gradient(
-    rgba(241, 30, 244, 0.25),
-    rgba(0, 255, 38, 0.25)
-  );
-} */
+
+.none {
+  display: none;
+}
