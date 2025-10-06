@@ -9,6 +9,10 @@ import eyeSlash from "../../../src/assets/eyeSlash.svg";
 import { SpinnerCustom } from "@/components/ui/spinner.jsx";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import {
+  startAuthentication,
+  startRegistration,
+} from "@simplewebauthn/browser";
 
 const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -86,15 +90,17 @@ const AuthPage = () => {
           "/webauthn/authentication/options",
           {
             username: signUpData.name,
-            displayname: signUpData.name,
           }
         );
+
+        if (!response?.data?.success) {
+          setLoading(false);
+          return toast("User not registered, please sign up.");
+        }
+
         setSignupData({ name: "", email: "", password: "" });
 
-        const credIn = await navigator.credentials.get({
-          publicKey: response.data,
-        });
-        console.log(JSON.stringify(credIn));
+        const credIn = await startAuthentication(response?.data?.opts);
 
         const verification = await authApi.post(
           "/webauthn/authentication/verify",
@@ -122,19 +128,19 @@ const AuthPage = () => {
         "/webauthn/registration/options",
         {
           username: signUpData.name,
-          displayname: signUpData.name,
+          displayName: signUpData.name,
         }
       );
-      setSignupData({ name: "", email: "", password: "" });
 
-      const credUp = await navigator.credentials.create({
-        publicKey: responseOpts.data,
-      });
-      console.log(credUp);
-
+      const opts = responseOpts?.data?.opts;
+      const credential = await startRegistration(opts);
+      const credReqBody = {
+        cred: JSON.stringify(credential),
+        userId: signUpData.name,
+      };
       const upResponse = await authApi.post(
         "/webauthn/registration/verify",
-        JSON.stringify(credUp),
+        credReqBody,
         {
           headers: {
             "Content-Type": "application/json",
@@ -143,15 +149,21 @@ const AuthPage = () => {
       );
 
       setLoading(false);
-      if (upResponse?.response?.data.success) {
-        toast(upResponse?.response?.data.message);
+      setSignupData({ name: "", email: "", password: "" });
+
+      if (upResponse?.data.success) {
+        toast(upResponse?.data.message);
         setIsSignUp(false);
       } else {
-        toast(upResponse?.response?.data.message);
+        toast(upResponse?.data.message);
       }
-      return;
     } catch (error) {
       setLoading(false);
+      toast(
+        error?.response?.data?.message !== "input.replace is not a function"
+          ? error?.response?.data?.message
+          : "User already registered, please sign in."
+      );
       console.error(
         "Error during registration:",
         error?.response?.data.message || error
