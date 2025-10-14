@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./AuthPage.css";
-import logo from "../../../src/assets/Logo.jpg";
+import logo from "../../../src/assets/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import ApiContext from "../../Axios";
 import toast, { Toaster } from "react-hot-toast";

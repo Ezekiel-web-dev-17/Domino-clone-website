@@ -1,0 +1,10 @@
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Disallow build/system files (not needed for indexing)
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /build/
+
+Sitemap: https://domino-clone-website.vercel.app/sitemap.xml

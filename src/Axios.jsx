@@ -5,7 +5,7 @@ const ApiContext = createContext(null);
 export function ApiProvider({ children }) {
   // Create one axios instance for the entire app
   const propertyApi = axios.create({
-    baseURL: " http://localhost:4000/api/v1/",
+    baseURL: " https://dominocloneapi.onrender.com/api/v1",
     headers: {
       "Content-Type": "application/json",
     },
