@@ -49,7 +49,7 @@ const AntPathLayer = ({ positions }) => {
 
 // Custom driver icon (red)
 const driverIcon = new L.Icon({
-  iconUrl: "../../src/assets/react.svg",
+  iconUrl: "../../src/assets/userLocation.svg",
   iconSize: [30, 50],
   iconAnchor: [15, 50],
   popupAnchor: [0, -50],
@@ -57,7 +57,7 @@ const driverIcon = new L.Icon({
 
 // Custom user icon (green)
 const userIcon = new L.Icon({
-  iconUrl: "../../public/vite.svg",
+  iconUrl: "../../src/assets/driverLocation.svg",
   iconSize: [30, 50],
   iconAnchor: [15, 50],
   popupAnchor: [0, -50],
