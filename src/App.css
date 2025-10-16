@@ -9,7 +9,6 @@
 @custom-variant dark (&:is(.dark *));
 
 #root {
-  max-width: 1280px;
   text-align: center;
 }
 
@@ -92,6 +91,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --font-serif: "Oswald", sans-serif;
 }
 
 .dark {
@@ -134,5 +134,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .oswald {
+    @apply font-serif *:cursor-pointer;
   }
 }
