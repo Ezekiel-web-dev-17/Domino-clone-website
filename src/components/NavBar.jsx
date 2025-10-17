@@ -34,6 +34,28 @@ const NavBar = () => {
           </Link>
         </ul>
       )}
+      {window.innerWidth >= 640 && (
+        <ul className="nav-links animate-accordion-down gap-10 *:font-extrabold *:text-lg *:text-blue-600 *:italic sm:*:not-italic absolute top-16 sm:top-0 z-40 right-0 py-7 sm:relative flex-col sm:flex-row oswald flex bg-white w-1/2 h-[90vh] sm:h-1/12">
+          <Link to="/menu">
+            <li>MENU</li>
+          </Link>
+          <Link to="/deals">
+            <li>DEALS</li>
+          </Link>
+          <Link to="/about-us">
+            <li>ABOUT US</li>
+          </Link>
+          <Link to="/contact">
+            <li>CONTACT</li>
+          </Link>
+          <Link
+            to="/cart"
+            className="relative text-blue-900 sm:hidden outline-4 animate-pulse outline-red-700"
+          >
+            <li>CART</li>
+          </Link>
+        </ul>
+      )}
       <Link className="relative hidden sm:flex" to="/cart">
         <svg
           xmlns="http://www.w3.org/2000/svg"
