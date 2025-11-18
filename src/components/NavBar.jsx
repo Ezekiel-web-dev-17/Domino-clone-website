@@ -5,15 +5,44 @@ import logo from "../../src/assets/Logo.png";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <nav className="flex items-center justify-between px-4 py-2 bg-white shadow sm:px-28 sm:py-0">
-      <span className="flex gap-3 cursor-pointer">
-        <img src={logo} alt="Website's logo" />
-        <h4 className="inline-block text-2xl font-extrabold text-transparent bg-gradient-to-r from-blue-700 via-purple-950 to-red-500 bg-clip-text">
+    <nav
+      className={`fixed z-30 flex items-center justify-between w-full px-4 py-2 sm:py-3 dark:bg-gray-900 bg-white shadow-2xl lg:-top-0.5 sm:px-9 lg:px-28 ${
+        open
+          ? "after:content-[''] after:absolute after:bg-black/65 after:backdrop-blur-[2px] after:top-14 after:right-0 after:-z-10 after:min-w-screen after:min-h-screen"
+          : ""
+      }`}
+    >
+      <span className="flex gap-1 min-[325px]:gap-3 cursor-pointer items-center">
+        <img
+          src={logo}
+          className="max-w-fit aspect-square"
+          alt="Website's logo"
+        />
+        <h4 className="inline-block text-2xl max-[325px]:text-xl font-extrabold text-transparent bg-gradient-to-r from-blue-700 via-purple-950 to-red-500 bg-clip-text">
           DOMINO'S PIZZA
         </h4>
       </span>
       {open && (
-        <ul className="nav-links animate-accordion-down gap-10 *:font-extrabold *:text-lg *:text-blue-600 *:italic sm:*:not-italic absolute top-16 sm:top-0 z-40 right-0 py-7 sm:relative flex-col sm:flex-row oswald flex bg-white w-1/2 h-[90vh] sm:h-1/12">
+        <menu className="nav-links animate-accordion-down gap-10 *:text-nowrap *:font-extrabold max-[325px]:*:text-base *:text-lg *:text-blue-600 *:italic absolute top-13 z-40 right-0 py-7 flex-col oswald flex dark:bg-zinc-800 bg-white w-full min-[360px]:max-w-[70vw] sm:max-w-[30vw] md:max-w-[25vw] h-screen">
+          <Link to="/menu">
+            <li>MENU</li>
+          </Link>
+          <Link to="/deals">
+            <li>DEALS</li>
+          </Link>
+          <Link to="/about-us">
+            <li>ABOUT US</li>
+          </Link>
+          <Link to="/contact">
+            <li>CONTACT</li>
+          </Link>
+          <Link to="/cart" className="relative text-blue-900 sm:hidden">
+            <li>CART</li>
+          </Link>
+        </menu>
+      )}
+      {window.innerWidth >= 1240 && (
+        <ul className="nav-links animate-accordion-down gap-10 *:font-extrabold *:text-lg *:text-blue-600 *:italic sm:*:not-italic absolute top-16 sm:top-0 z-40 right-0 sm:relative flex-col sm:flex-row oswald flex bg-white w-1/2 h-[90vh] sm:h-1/12">
           <Link to="/menu">
             <li>MENU</li>
           </Link>
@@ -28,35 +57,13 @@ const NavBar = () => {
           </Link>
           <Link
             to="/cart"
-            className="relative text-blue-900 sm:hidden outline-4 animate-pulse outline-red-700"
+            className="relative text-blue-900 sm:hidden animate-pulse"
           >
             <li>CART</li>
           </Link>
         </ul>
       )}
-      {window.innerWidth >= 640 && (
-        <ul className="nav-links animate-accordion-down gap-10 *:font-extrabold *:text-lg *:text-blue-600 *:italic sm:*:not-italic absolute top-16 sm:top-0 z-40 right-0 py-7 sm:relative flex-col sm:flex-row oswald flex bg-white w-1/2 h-[90vh] sm:h-1/12">
-          <Link to="/menu">
-            <li>MENU</li>
-          </Link>
-          <Link to="/deals">
-            <li>DEALS</li>
-          </Link>
-          <Link to="/about-us">
-            <li>ABOUT US</li>
-          </Link>
-          <Link to="/contact">
-            <li>CONTACT</li>
-          </Link>
-          <Link
-            to="/cart"
-            className="relative text-blue-900 sm:hidden outline-4 animate-pulse outline-red-700"
-          >
-            <li>CART</li>
-          </Link>
-        </ul>
-      )}
-      <Link className="relative hidden sm:flex" to="/cart">
+      <Link className="relative hidden xl:flex" to="/cart">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={`${window.innerWidth < 450 ? "18" : "26"}`}
@@ -70,11 +77,10 @@ const NavBar = () => {
         <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></div>
       </Link>
       <div
-        className="relative flex sm:hidden"
+        className="relative flex xl:hidden"
         onClick={(e) => {
           e.preventDefault();
           setOpen(!open);
-          console.log(open);
         }}
       >
         <svg
@@ -82,7 +88,7 @@ const NavBar = () => {
           width="18"
           height="18"
           fill="blue"
-          className="relative block cursor-pointer bi bi-list sm:hidden"
+          className="relative block cursor-pointer bi bi-list xl:hidden"
           viewBox="0 0 16 16"
         >
           <path

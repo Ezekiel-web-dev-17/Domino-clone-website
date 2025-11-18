@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./pages/home/Home.jsx";
 import AuthPage from "./pages/auth/AuthPage.jsx";
 import { ApiProvider } from "./Axios.jsx";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </ApiProvider>
