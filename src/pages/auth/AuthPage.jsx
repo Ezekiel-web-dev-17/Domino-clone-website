@@ -66,8 +66,8 @@ const AuthPage = () => {
       setLoading(false);
       toast(error?.response?.data?.message || "An error occurred");
       console.error(
-        "Error during registration:",
-        error.response?.data.message || error.message || error
+        `${isSignUp ? "Error during registration: " : "Error during login: "}`,
+        error?.response?.data?.message || error
       );
     }
   };
@@ -165,8 +165,8 @@ const AuthPage = () => {
           : "User already registered, please sign in."
       );
       console.error(
-        "Error during registration:",
-        error?.response?.data.message || error
+        `${isSignUp ? "Error during registration: " : "Error during login: "}`,
+        error?.response?.data?.message || error
       );
     }
   };
@@ -239,7 +239,7 @@ const AuthPage = () => {
             </div>
           )}
           {!webAuthSign && (
-            <>
+            <div className="flex flex-col items-center gap-5 normal-sign-up">
               <div className="flex justify-center gap-3 text-white">
                 <label htmlFor="email" className="text-sm font-normal">
                   Email:
@@ -248,6 +248,7 @@ const AuthPage = () => {
                   type="email"
                   name="email"
                   id="email"
+                  autoComplete="email"
                   className="w-48 px-2 text-base border-b-2 sm:w-full border-b-white focus:outline-none"
                   placeholder="Email address"
                   value={signUpData.email}
@@ -263,6 +264,7 @@ const AuthPage = () => {
                 <input
                   type={show ? "text" : "password"}
                   name="password"
+                  autoComplete="current-password"
                   id="password"
                   className="w-40 px-2 text-base border-b-2 sm:w-full border-b-white focus:outline-none"
                   placeholder="Password"
@@ -279,7 +281,7 @@ const AuthPage = () => {
                   {show && <img src={eyeSlash} alt="Hide password" />}
                 </p>
               </div>
-            </>
+            </div>
           )}
         </div>
 

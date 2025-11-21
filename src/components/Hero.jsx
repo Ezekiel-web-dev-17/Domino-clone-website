@@ -34,7 +34,7 @@ const Hero = () => {
       >
         Place order now
       </button>
-      <div className="relative min-h-screen min-w-screen before:absolute before:-inset-1 before:block before:bg-black-500 before:bg-popover-foreground before:opacity-40">
+      <div className="relative z-0 min-h-screen min-w-screen before:absolute before:-inset-1 before:block before:bg-black-500 before:bg-popover-foreground before:opacity-40">
         <img
           src={window.innerWidth < 640 ? bg2 : bg}
           className="w-full h-screen overflow-hidden"
